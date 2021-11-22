@@ -86,6 +86,7 @@ public class Publication {
     @JsonIdentityReference(alwaysAsId=true)
     private Set<Person> authors = new HashSet<>();
 
+
     public Long getId() {
         return id;
     }

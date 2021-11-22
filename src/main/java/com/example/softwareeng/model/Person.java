@@ -56,7 +56,8 @@ public class Person {
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id")
     @JsonIdentityReference(alwaysAsId=true)
-    private Set<Publication> blockedpublications = new HashSet<>();
+    private Set<Publication> blockedPublications = new HashSet<>();
+
 
 
     public Long getId() {
@@ -123,11 +124,11 @@ public class Person {
         this.publications = publications;
     }
 
-    public Set<Publication> getBlockedpublications() {
-        return blockedpublications;
+    public Set<Publication> getBlockedPublications() {
+        return blockedPublications;
     }
 
-    public void setBlockedpublications(Set<Publication> blockedpublications) {
-        this.blockedpublications = blockedpublications;
+    public void setBlockedPublications(Set<Publication> blockedpublications) {
+        this.blockedPublications = blockedpublications;
     }
 }
