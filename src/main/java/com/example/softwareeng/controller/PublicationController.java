@@ -33,6 +33,16 @@ public class PublicationController {
         return new ResponseEntity(publRepository.getPublications(personid),HttpStatus.OK);
     }
 
+    @GetMapping("/publication/blocked/{personid}")
+    public ResponseEntity<Publication> publicationsBlocked(@PathVariable("personid") Long personid){
+        return new ResponseEntity(publRepository.getBlockedPublications(personid),HttpStatus.OK);
+    }
+
+    @GetMapping("/publication/notblocked/{personid}")
+    public ResponseEntity<Publication> publicationsNotBlocked(@PathVariable("personid") Long personid){
+        return new ResponseEntity(publRepository.getNotBlockedPublications(personid),HttpStatus.OK);
+    }
+
 
     @PutMapping(value = "/populate")
     public ResponseEntity populateSemantic(@RequestParam(name = "personid") Long personid){
@@ -52,6 +62,4 @@ public class PublicationController {
         System.out.println("Here3");
         return new ResponseEntity(HttpStatus.OK);
     }
-
-
 }
