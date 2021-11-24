@@ -41,7 +41,7 @@ public class PublicationRepository {
         return null;
     }
 //    people from database.
-    
+
     public List<Person> getPeople() {
         return em.createQuery("SELECT c FROM Person c").getResultList();
     }
@@ -50,12 +50,7 @@ public class PublicationRepository {
         return em.createQuery("SELECT c FROM Publication c").getResultList();
     }
 
-    public List<Publication> getPublicationsByDOI(String doi) {
-        Query query = em.createQuery("SELECT c FROM Publication c where c.doi = :doi");
-        query.setParameter("doi", doi).getResultList();
-        return query.getResultList();
 
-    }
 
     public void populate(Person p) throws IOException, JSONException {
         String url = p.getUrl();
