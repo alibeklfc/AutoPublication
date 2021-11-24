@@ -40,7 +40,8 @@ public class PublicationRepository {
         }
         return null;
     }
-
+//    people from database.
+    
     public List<Person> getPeople() {
         return em.createQuery("SELECT c FROM Person c").getResultList();
     }
