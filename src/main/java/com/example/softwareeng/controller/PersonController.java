@@ -28,7 +28,12 @@ public class PersonController {
         return new ResponseEntity(personRepository.getPerson(personid), HttpStatus.OK);
     }
 
-
+    @PutMapping(value = "/person", consumes="application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity addPerson(@RequestBody Person person){
+        personRepository.addPerson(person);
+        return new ResponseEntity(person, HttpStatus.OK);
+    }
 
     @PutMapping("/block")
     public ResponseEntity<Publication> blockPublication(@RequestParam("personid") Long personid, @RequestParam("publid") Long publid ){
