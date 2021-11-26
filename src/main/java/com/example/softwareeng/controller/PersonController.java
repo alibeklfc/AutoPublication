@@ -41,6 +41,10 @@ public class PersonController {
         return new ResponseEntity("blocked",HttpStatus.OK);
     }
 
-
+    @PutMapping("/unblock")
+    public ResponseEntity<Publication> unBlockPublication(@RequestParam("personid") Long personid, @RequestParam("publid") Long publid ){
+        personRepository.unBlockPublication(personid, publid);
+        return new ResponseEntity("unblocked",HttpStatus.OK);
+    }
 
 }
