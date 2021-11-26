@@ -38,7 +38,15 @@ public class PersonRepository {
         em.persist(publication);
     }
 
-
+    public Person getPerson(Long personid) {
+        List<Person> lp = em.createQuery(
+                "select p from Person p where p.id =:id"
+        ).setParameter("id", personid).getResultList();
+        if(lp.size() == 1){
+            return lp.get(0);
+        }
+        return null;
+    }
 
     public void unBlockPublication(Long personid, Long publid) {
         Person p = getPerson(personid);
