@@ -48,18 +48,5 @@ public class PersonRepository {
         return null;
     }
 
-    public void unBlockPublication(Long personid, Long publid) {
-        Person p = getPerson(personid);
-        List<Publication> publ = em.createQuery(
-                "select p from Publication p where p.id=:publid").setParameter("publid", publid).getResultList();
-        if(publ.size()==0){
-            return;
-        }
-        Publication publication = publ.get(0);
-        if(p.getPublications().contains(publication)){
-            publication.getAuthorsblocked().remove(p);
-        }
-        em.persist(publication);
 
-    }
 }
