@@ -154,7 +154,11 @@ public class PublicationRepository {
     }
 
 
-
+    public List<Publication> getBlockedPublications(Long personid) {
+        Query query = em.createQuery("SELECT c.blockedPublications FROM Person c where c.id = :personid");
+        query.setParameter("personid", personid).getResultList();
+        return query.getResultList();
+    }
 
 
     public List<Publication> getNotBlockedPublications(Long personid) {
