@@ -2,6 +2,10 @@ package com.example.softwareeng.services;
 
 import com.example.softwareeng.model.Person;
 import com.example.softwareeng.model.Publication;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,11 +19,16 @@ public class PersonRepository {
     @PersistenceContext
     private EntityManager em;
 
+    @Autowired
+    private JavaMailSender javaMailSender;
+
     public List<Person> getPeople() {
         return em.createQuery("SELECT c FROM Person c").getResultList();
     }
 
     public void addPerson(Person person) {
+        String token = RandomStringUtils.randomAlphanumeric(17);
+        person.setToken(token);
         em.persist(person);
     }
 
@@ -60,6 +69,14 @@ public class PersonRepository {
             publication.getAuthorsblocked().remove(p);
         }
         em.persist(publication);
+    }
 
+    public void sendEmail(String textMsg){
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo("alibek.zhakubayev@gmail.com");
+
+        msg.setSubject("Testing from Spring Boot");
+        msg.setText(textMsg);
+        javaMailSender.send(msg);
     }
 }

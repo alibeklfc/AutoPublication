@@ -47,4 +47,10 @@ public class PersonController {
         return new ResponseEntity("unblocked",HttpStatus.OK);
     }
 
+    @GetMapping("/testemail")
+    public ResponseEntity<Person> sendEmail(@RequestParam("text") String text) {
+        personRepository.sendEmail(text);
+        return new ResponseEntity("Sent", HttpStatus.OK);
+    }
+
 }

@@ -41,6 +41,10 @@ public class Person {
     @Column
     private String url;
 
+    @NotNull
+    @Column
+    private String token;
+
 
     @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
     @NotNull
@@ -130,5 +134,13 @@ public class Person {
 
     public void setBlockedPublications(Set<Publication> blockedpublications) {
         this.blockedPublications = blockedpublications;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
