@@ -79,12 +79,13 @@ public class PersonRepository {
         return 1;
     }
 
-    public void sendEmail(String textMsg){
+    public void sendEmail(Long personid){
+        Person p = getPerson(personid);
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("alibek.zhakubayev@gmail.com");
+        msg.setTo(p.getEmail());
 
-        msg.setSubject("Testing from Spring Boot");
-        msg.setText(textMsg);
+        msg.setSubject("Your link for Baylor AutoPub modification page");
+        msg.setText("https://localhost:4200/user/" + + p.getId() + "/" + p.getToken());
         javaMailSender.send(msg);
     }
 }

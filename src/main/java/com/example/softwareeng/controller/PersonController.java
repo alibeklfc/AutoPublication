@@ -43,7 +43,7 @@ public class PersonController {
     public ResponseEntity<Publication> blockPublication(@RequestParam("personid") Long personid, @RequestParam("publid") Long publid, @RequestParam("token") String token ){
         int temp = personRepository.blockPublication(personid, publid, token);
         if (temp == 0){
-            return new ResponseEntity("unsuccessful attempt to block",HttpStatus.OK);
+            return new ResponseEntity("unsuccessful attempt to block",HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity("blocked",HttpStatus.OK);
     }
@@ -52,14 +52,14 @@ public class PersonController {
     public ResponseEntity<Publication> unBlockPublication(@RequestParam("personid") Long personid, @RequestParam("publid") Long publid, @RequestParam("token") String token ){
         int temp =  personRepository.unBlockPublication(personid, publid, token);
         if (temp == 0){
-            return new ResponseEntity("unsuccessful attempt to unblock",HttpStatus.OK);
+            return new ResponseEntity("unsuccessful attempt to unblock",HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity("unblocked",HttpStatus.OK);
     }
 
-    @GetMapping("/testemail")
-    public ResponseEntity<Person> sendEmail(@RequestParam("text") String text) {
-        personRepository.sendEmail(text);
+    @GetMapping("/sendEmail")
+    public ResponseEntity<Person> sendEmail(@RequestParam("personid") Long personid) {
+        personRepository.sendEmail(personid);
         return new ResponseEntity("Sent", HttpStatus.OK);
     }
 
