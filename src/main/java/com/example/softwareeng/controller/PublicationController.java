@@ -44,5 +44,22 @@ public class PublicationController {
     }
 
 
-
+    @PutMapping(value = "/populate")
+    public ResponseEntity populateSemantic(@RequestParam(name = "personid") Long personid){
+        List<Person> lp = publRepository.getPeople();
+        System.out.println("Here1");
+        for(Person p: lp){
+            if(p.getId().equals(personid)){
+                try {
+                    System.out.println("Here2");
+                    publRepository.populate(p);
+                } catch (JSONException | IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
+        System.out.println("Here3");
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
