@@ -71,5 +71,12 @@ public class PersonRepository {
         em.persist(publication);
     }
 
+    public void sendEmail(String textMsg){
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo("alibek.zhakubayev@gmail.com");
 
+        msg.setSubject("Testing from Spring Boot");
+        msg.setText(textMsg);
+        javaMailSender.send(msg);
+    }
 }
