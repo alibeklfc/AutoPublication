@@ -33,18 +33,22 @@ public class PersonRepository {
     }
 
 
-    public void blockPublication(Long personid, Long publid) {
+    public int blockPublication(Long personid, Long publid, String token) {
         Person p = getPerson(personid);
+        if(!p.getToken().equals(token)){
+            return 0;
+        }
         List<Publication> publ = em.createQuery(
                 "select p from Publication p where p.id=:publid").setParameter("publid", publid).getResultList();
         if(publ.size()==0){
-            return;
+            return 0;
         }
         Publication publication = publ.get(0);
         if(p.getPublications().contains(publication)){
             publication.getAuthorsblocked().add(p);
         }
         em.persist(publication);
+        return 1;
     }
 
     public Person getPerson(Long personid) {
@@ -57,18 +61,22 @@ public class PersonRepository {
         return null;
     }
 
-    public void unBlockPublication(Long personid, Long publid) {
+    public int unBlockPublication(Long personid, Long publid, String token) {
         Person p = getPerson(personid);
+        if(!p.getToken().equals(token)){
+            return 0;
+        }
         List<Publication> publ = em.createQuery(
                 "select p from Publication p where p.id=:publid").setParameter("publid", publid).getResultList();
         if(publ.size()==0){
-            return;
+            return 0;
         }
         Publication publication = publ.get(0);
         if(p.getPublications().contains(publication)){
             publication.getAuthorsblocked().remove(p);
         }
         em.persist(publication);
+        return 1;
     }
 
     public void sendEmail(String textMsg){

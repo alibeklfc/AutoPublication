@@ -56,6 +56,13 @@ public class PublicationRepository {
 
     }
 
+    public List<Publication> getPublicationsByTitle(String title) {
+        Query query = em.createQuery("SELECT c FROM Publication c where c.title = :title");
+        query.setParameter("title", title).getResultList();
+        return query.getResultList();
+
+    }
+
     public void populate(Person p) throws IOException, JSONException {
         String url = p.getUrl();
         //String url = "https://api.semanticscholar.org/graph/v1/author/1682740/papers?fields=externalIds,url,title,abstract,venue,year,citationCount,authors&limit=999";
@@ -72,7 +79,15 @@ public class PublicationRepository {
                     em.persist(pub);
                     continue;
                 }
+
             }catch (Exception exception){
+            }
+            List<Publication> temp2 = getPublicationsByTitle(array.getJSONObject(i).getString("title"));
+            if (temp2.size() != 0){
+                Publication pub = getPublicationsByTitle(array.getJSONObject(i).getString("title")).get(0);
+                pub.getAuthors().add(p);
+                em.persist(pub);
+                continue;
             }
             Publication publ = new Publication();
             if(array.getJSONObject(i).getString("abstract").length() > 7999){

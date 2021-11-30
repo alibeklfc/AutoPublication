@@ -25,6 +25,10 @@ public class PersonController {
 
     @GetMapping("/person")
     public ResponseEntity<Person> getPerson(@RequestParam("personid") Long personid) {
+        Person p = personRepository.getPerson(personid);
+        if(p == null){
+            return new ResponseEntity("", HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity(personRepository.getPerson(personid), HttpStatus.OK);
     }
 
@@ -36,14 +40,20 @@ public class PersonController {
     }
 
     @PutMapping("/block")
-    public ResponseEntity<Publication> blockPublication(@RequestParam("personid") Long personid, @RequestParam("publid") Long publid ){
-        personRepository.blockPublication(personid, publid);
+    public ResponseEntity<Publication> blockPublication(@RequestParam("personid") Long personid, @RequestParam("publid") Long publid, @RequestParam("token") String token ){
+        int temp = personRepository.blockPublication(personid, publid, token);
+        if (temp == 0){
+            return new ResponseEntity("unsuccessful attempt to block",HttpStatus.OK);
+        }
         return new ResponseEntity("blocked",HttpStatus.OK);
     }
 
     @PutMapping("/unblock")
-    public ResponseEntity<Publication> unBlockPublication(@RequestParam("personid") Long personid, @RequestParam("publid") Long publid ){
-        personRepository.unBlockPublication(personid, publid);
+    public ResponseEntity<Publication> unBlockPublication(@RequestParam("personid") Long personid, @RequestParam("publid") Long publid, @RequestParam("token") String token ){
+        int temp =  personRepository.unBlockPublication(personid, publid, token);
+        if (temp == 0){
+            return new ResponseEntity("unsuccessful attempt to unblock",HttpStatus.OK);
+        }
         return new ResponseEntity("unblocked",HttpStatus.OK);
     }
 
