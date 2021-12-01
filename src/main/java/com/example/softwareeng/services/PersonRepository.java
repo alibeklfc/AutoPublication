@@ -61,7 +61,23 @@ public class PersonRepository {
         return null;
     }
 
-
+    public int unBlockPublication(Long personid, Long publid, String token) {
+        Person p = getPerson(personid);
+        if(!p.getToken().equals(token)){
+            return 0;
+        }
+        List<Publication> publ = em.createQuery(
+                "select p from Publication p where p.id=:publid").setParameter("publid", publid).getResultList();
+        if(publ.size()==0){
+            return 0;
+        }
+        Publication publication = publ.get(0);
+        if(p.getPublications().contains(publication)){
+            publication.getAuthorsblocked().remove(p);
+        }
+        em.persist(publication);
+        return 1;
+    }
 
     public void sendEmail(Long personid){
         Person p = getPerson(personid);
