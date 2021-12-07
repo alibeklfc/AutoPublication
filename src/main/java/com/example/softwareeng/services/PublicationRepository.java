@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 @Transactional
@@ -74,33 +75,61 @@ public class PublicationRepository {
                 String doi = externalIds.getString("DOI");
                 List<Publication> temp = getPublicationsByDOI(doi);
                 if (temp.size() != 0){
-                    Publication pub = getPublicationsByDOI(doi).get(0);
-                    pub.getAuthors().add(p);
-                    em.persist(pub);
+                    int ch = 0;
+                    for(Person pers: temp.get(0).getAuthors()){
+                        if (Objects.equals(pers.getId(), p.getId())){
+                            ch = 1;
+                            break;
+                        }
+                    }
+                    if(ch == 1){
+                        continue;
+                    }
+                    if(!temp.get(0).getAuthors().contains(p)){
+                        temp.get(0).getAuthors().add(p);
+                        em.persist(temp.get(0));
+                    }
                     continue;
                 }
 
             }catch (Exception exception){
+                System.out.println(exception);
             }
+
             List<Publication> temp2 = getPublicationsByTitle(array.getJSONObject(i).getString("title"));
             if (temp2.size() != 0){
-                Publication pub = getPublicationsByTitle(array.getJSONObject(i).getString("title")).get(0);
-                pub.getAuthors().add(p);
-                em.persist(pub);
+                int ch = 0;
+                for(Person pers: temp2.get(0).getAuthors()){
+                    if (Objects.equals(pers.getId(), p.getId())){
+                        ch = 1;
+                        break;
+                    }
+                }
+                if(ch == 1){
+                    continue;
+                }
+                temp2.get(0).getAuthors().add(p);
+                em.persist(temp2.get(0));
                 continue;
             }
+
+
             Publication publ = new Publication();
+            try{
             if(array.getJSONObject(i).getString("abstract").length() > 7999){
                 continue;
+            }}catch(Exception ex){
             }
+
             try{
                 publ.setTitle(array.getJSONObject(i).getString("title"));
                 publ.setDescription(array.getJSONObject(i).getString("abstract"));
                 publ.setVenue(array.getJSONObject(i).getString("venue"));
-                publ.setCitations(Integer.parseInt(array.getJSONObject(i).getString("citationCount")));}
-            catch (Exception ex){
+                publ.setCitations((Integer) array.getJSONObject(i).getNumber("citationCount"));
+            }catch (Exception ex){
                 continue;
             }
+
             JSONArray authorsArr = array.getJSONObject(i).getJSONArray("authors");
             StringBuilder sb = new StringBuilder();
             for(int j = 0; j < authorsArr.length(); j++){
@@ -161,7 +190,6 @@ public class PublicationRepository {
                     }
                 }
             }catch(Exception exception){
-                System.err.println(exception);
             }
             publ.getAuthors().add(p);
             em.persist(publ);

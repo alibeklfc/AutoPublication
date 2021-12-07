@@ -59,16 +59,17 @@ public class PublicationController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    //@Scheduled(fixedRate = 262980000)
-//    public void greeting() {
-//        List<Person> lp = publRepository.getPeople();
-//        for(Person p: lp){
-//            try {
-//                publRepository.populate(p);
-//            } catch (JSONException | IOException e) {
-//                e.printStackTrace();
-//            }
-//            break;
-//        }
-//    }
+    @Scheduled(fixedRate = 262980000)
+    public void greeting() {
+        List<Person> lp = publRepository.getPeople();
+        for(Person p: lp){
+            try {
+                publRepository.populate(p);
+            } catch (JSONException | IOException e) {
+                continue;
+            }
+        }
+    }
+
+
 }

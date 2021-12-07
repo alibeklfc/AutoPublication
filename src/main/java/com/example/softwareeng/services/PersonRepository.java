@@ -6,6 +6,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -87,5 +88,15 @@ public class PersonRepository {
         msg.setSubject("Your link for Baylor AutoPub modification page");
         msg.setText("http://localhost:4200/user/publication/" + + p.getId() + "/" + p.getToken());
         javaMailSender.send(msg);
+    }
+
+    public void changeToken(Person p) {
+        String token = RandomStringUtils.randomAlphanumeric(17);
+        Person pers= (Person)em.find(Person.class , p.getId());
+        em.createQuery("update Person p set p.token = :token where p.id=:publid").setParameter("publid", p.getId()).setParameter("token", token)
+                .executeUpdate();
+
+        System.out.println("qweqweqw");
+        em.persist(pers);
     }
 }
