@@ -85,7 +85,7 @@ public class PersonRepository {
         msg.setTo(p.getEmail());
 
         msg.setSubject("Your link for Baylor AutoPub modification page");
-        msg.setText("https://localhost:4200/user/" + + p.getId() + "/" + p.getToken());
+        msg.setText("http://localhost:4200/user/publication/" + + p.getId() + "/" + p.getToken());
         javaMailSender.send(msg);
     }
 }

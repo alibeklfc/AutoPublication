@@ -5,9 +5,11 @@ import com.example.softwareeng.model.Publication;
 import com.example.softwareeng.services.PersonRepository;
 import com.example.softwareeng.services.PublicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -15,6 +17,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@EnableScheduling
 public class PublicationController {
     private PublicationRepository publRepository;
 
@@ -45,18 +48,27 @@ public class PublicationController {
 
 
     @PutMapping(value = "/populate")
-    public ResponseEntity populateSemantic(@RequestParam(name = "personid") Long personid){
+    public ResponseEntity populateSemantic(@RequestParam(name = "personid") Long personid) throws IOException, JSONException {
         List<Person> lp = publRepository.getPeople();
         for(Person p: lp){
             if(p.getId().equals(personid)){
-                try {
-                    publRepository.populate(p);
-                } catch (JSONException | IOException e) {
-                    e.printStackTrace();
-                }
+                publRepository.populate(p);
                 break;
             }
         }
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    //@Scheduled(fixedRate = 262980000)
+//    public void greeting() {
+//        List<Person> lp = publRepository.getPeople();
+//        for(Person p: lp){
+//            try {
+//                publRepository.populate(p);
+//            } catch (JSONException | IOException e) {
+//                e.printStackTrace();
+//            }
+//            break;
+//        }
+//    }
 }

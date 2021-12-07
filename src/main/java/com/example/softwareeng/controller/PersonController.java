@@ -45,7 +45,7 @@ public class PersonController {
         if (temp == 0){
             return new ResponseEntity("unsuccessful attempt to block",HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity("blocked",HttpStatus.OK);
+        return new ResponseEntity("{\"response\": \"blocked\"}",HttpStatus.OK);
     }
 
     @PutMapping("/unblock")
@@ -54,13 +54,14 @@ public class PersonController {
         if (temp == 0){
             return new ResponseEntity("unsuccessful attempt to unblock",HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity("unblocked",HttpStatus.OK);
+        return new ResponseEntity("{\"response\": \"unblocked\"}",HttpStatus.OK);
     }
 
     @GetMapping("/sendEmail")
     public ResponseEntity<Person> sendEmail(@RequestParam("personid") Long personid) {
         personRepository.sendEmail(personid);
-        return new ResponseEntity("Sent", HttpStatus.OK);
+        System.out.println(personid);
+        return new ResponseEntity("\"{\\\"response\\\": \\\"sent\\\"}", HttpStatus.OK);
     }
 
 }
