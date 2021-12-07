@@ -64,6 +64,9 @@ public class Publication {
     @Column( length = 8000 )
     private String bibtex;
 
+    @Column(length = 255)
+    private String link;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "BLOCKED_PUBLICATIONS_PERSON",
             joinColumns = { @JoinColumn(name = "PUBLICATION_ID", referencedColumnName = "ID") }, //do not forget referencedColumnName if name is different
@@ -209,5 +212,13 @@ public class Publication {
 
     public void setAuthors(Set<Person> authors) {
         this.authors = authors;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }

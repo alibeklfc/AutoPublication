@@ -13,6 +13,9 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -126,6 +129,9 @@ public class PublicationRepository {
                 publ.setDescription(array.getJSONObject(i).getString("abstract"));
                 publ.setVenue(array.getJSONObject(i).getString("venue"));
                 publ.setCitations((Integer) array.getJSONObject(i).getNumber("citationCount"));
+                Document doc = Jsoup.connect(array.getJSONObject(i).getString("url")).get();
+                Element link = doc.getElementsByClass("alternate-sources__dropdown-button").first();
+                publ.setLink(link.attr("href"));
             }catch (Exception ex){
                 continue;
             }
