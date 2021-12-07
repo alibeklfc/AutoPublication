@@ -1,0 +1,130 @@
+curl --location --request PUT 'http://localhost:8080/person' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "firstname": "Tomas",
+  "lastname": "Cerny",
+  "email": "tomas_cerny@baylor.edu",
+  "source": "Semantic Scholar",
+  "institution": "Baylor University",
+  "url": "https://api.semanticscholar.org/graph/v1/author/31447119/papers?fields=externalIds,url,title,abstract,venue,year,citationCount,authors&limit=999"
+}'
+
+curl --location --request PUT 'http://localhost:8080/person' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "firstname": "Jeff",
+  "lastname": "Donahoo",
+  "email": "Jeff_Donahoo@baylor.edu",
+  "source": "Semantic Scholar",
+  "institution": "Baylor University",
+  "url": "https://api.semanticscholar.org/graph/v1/author/1682740/papers?fields=externalIds,url,title,abstract,venue,year,citationCount,authors&limit=999"
+}'
+
+curl --location --request PUT 'http://localhost:8080/person' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "firstname": "Erich",
+  "lastname": "Baker",
+  "email": "Erich_Baker@baylor.edu",
+  "source": "Semantic Scholar",
+  "institution": "Baylor University",
+  "url": "https://api.semanticscholar.org/graph/v1/author/3010456/papers?fields=externalIds,url,title,abstract,venue,year,citationCount,authors&limit=999"
+}'
+
+curl --location --request PUT 'http://localhost:8080/person' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "firstname": "Mary Lauren",
+  "lastname": "Benton",
+  "email": "marylauren_benton@baylor.edu",
+  "source": "Semantic Scholar",
+  "institution": "Baylor University",
+  "url": "https://api.semanticscholar.org/graph/v1/author/11569039/papers?fields=externalIds,url,title,abstract,venue,year,citationCount,authors&limit=999"
+}'
+
+curl --location --request PUT 'http://localhost:8080/person' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "firstname": "Greg",
+  "lastname": "Hamerly",
+  "email": "Greg_Hamerly@baylor.edu",
+  "source": "Semantic Scholar",
+  "institution": "Baylor University",
+  "url": "https://api.semanticscholar.org/graph/v1/author/2916750/papers?fields=externalIds,url,title,abstract,venue,year,citationCount,authors&limit=999"
+}'
+
+curl --location --request PUT 'http://localhost:8080/person' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "firstname": "Pete",
+  "lastname": "Maurer",
+  "email": "Peter_Maurer@baylor.edu",
+  "source": "Semantic Scholar",
+  "institution": "Baylor University",
+  "url": "https://api.semanticscholar.org/graph/v1/author/2202655/papers?fields=externalIds,url,title,abstract,venue,year,citationCount,authors&limit=999"
+}'
+
+curl --location --request PUT 'http://localhost:8080/person' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "firstname": "Michael",
+  "lastname": "Poor",
+  "email": "Michael_Poor@baylor.edu",
+  "source": "Semantic Scholar",
+  "institution": "Baylor University",
+  "url": "https://api.semanticscholar.org/graph/v1/author/143657325/papers?fields=externalIds,url,title,abstract,venue,year,citationCount,authors&limit=999"
+}'
+
+curl --location --request PUT 'http://localhost:8080/person' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "firstname": "Pablo",
+  "lastname": "Rivas",
+  "email": "Pablo_Rivas@baylor.edu",
+  "source": "Semantic Scholar",
+  "institution": "Baylor University",
+  "url": "https://api.semanticscholar.org/graph/v1/author/134599600/papers?fields=externalIds,url,title,abstract,venue,year,citationCount,authors&limit=999"
+}'
+
+curl --location --request PUT 'http://localhost:8080/person' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "firstname": "Eunjee",
+  "lastname": "Song",
+  "email": "Eunjee_Song@baylor.edu",
+  "source": "Semantic Scholar",
+  "institution": "Baylor University",
+  "url": "https://api.semanticscholar.org/graph/v1/author/2201294/papers?fields=externalIds,url,title,abstract,venue,year,citationCount,authors&limit=999"
+}'
+
+curl --location --request PUT 'http://localhost:8080/person' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "firstname": "Greg",
+  "lastname": "Speegle",
+  "email": "Greg_Speegle@baylor.edu",
+  "source": "Semantic Scholar",
+  "institution": "Baylor University",
+  "url": "https://api.semanticscholar.org/graph/v1/author/1768196/papers?fields=externalIds,url,title,abstract,venue,year,citationCount,authors&limit=999"
+}'
+
+
+{
+  "firstname": "Alibek",
+  "lastname": "Zhakubayev",
+  "email": "alibek.zhakubayev@gmail.com",
+  "source": "Semantic Scholar",
+  "institution": "Baylor University",
+  "url": "https://api.semanticscholar.org/graph/v1/author/1491624358/papers?fields=externalIds,url,title,abstract,venue,year,citationCount,authors&limit=999"
+}
+
+curl --location --request PUT 'http://localhost:8080/populate?personid=1'
+curl --location --request PUT 'http://localhost:8080/populate?personid=2'
+curl --location --request PUT 'http://localhost:8080/populate?personid=3'
+curl --location --request PUT 'http://localhost:8080/populate?personid=4'
+curl --location --request PUT 'http://localhost:8080/populate?personid=5'
+curl --location --request PUT 'http://localhost:8080/populate?personid=6'
+curl --location --request PUT 'http://localhost:8080/populate?personid=7'
+curl --location --request PUT 'http://localhost:8080/populate?personid=8'
+curl --location --request PUT 'http://localhost:8080/populate?personid=9'
+curl --location --request PUT 'http://localhost:8080/populate?personid=10'
