@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
+//@CrossOrigin(origins = "http://129.62.148.104:80")
 @CrossOrigin
 @EnableScheduling
 public class PersonController {
